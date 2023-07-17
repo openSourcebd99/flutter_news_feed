@@ -1,37 +1,15 @@
 import 'package:flutter/material.dart';
-import '../components/content_widget.dart';
+import '../components/news_card_widget.dart';
 
 Widget buildResponsiveLayout(
   BoxConstraints constraints,
   Orientation orientation,
 ) {
-  return SingleChildScrollView(
-    child: orientation == Orientation.portrait
-        ? Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: ContentWidgets(
-                layoutBuilder: (context, children) {
-                  return Column(
-                    children: children,
-                  );
-                },
-              ),
-            ),
-          )
-        : Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: ContentWidgets(
-                layoutBuilder: (context, children) {
-                  return Row(
-                    children: children,
-                  );
-                },
-              ),
-            ),
-          ),
-  );
+  return orientation == Orientation.portrait
+      ? ListView.builder(
+          itemCount: 30, itemBuilder: (context, index) => const CardWidget())
+      : ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 9, // Adjust the item count as needed
+          itemBuilder: (context, index) => const CardWidget());
 }
